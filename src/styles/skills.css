@@ -1,0 +1,116 @@
+/* --- Skills Section (Categorized) --- */
+.skills-section-neon {
+    padding: var(--spacing-lg) 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.skill-category-section {
+    margin-bottom: 4rem;
+}
+
+.skill-category-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 2rem;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    position: relative;
+    padding-left: 1rem;
+}
+
+.skill-category-title::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    height: 100%;
+    width: 4px;
+    background: var(--neon-cyan);
+    border-radius: 2px;
+    box-shadow: 0 0 10px var(--neon-cyan);
+}
+
+.skills-grid-neon {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start; /* Align left for categories */
+    gap: 20px;
+}
+
+.skill-card-3d {
+    width: 110px; /* Slightly smaller to fit more */
+    height: 110px;
+    background: rgba(20, 20, 20, 0.4);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    backdrop-filter: blur(5px);
+}
+
+.skill-card-3d:hover {
+    transform: translateY(-5px);
+    background: rgba(255,255,255,0.05);
+    border-color: var(--neon-cyan);
+    box-shadow: 0 10px 30px -10px rgba(0, 242, 234, 0.3);
+}
+
+.skill-icon-wrapper {
+    width: 36px;
+    height: 36px;
+    margin-bottom: 12px;
+}
+
+.skill-icon-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: invert(1) brightness(0.9); 
+    transition: all 0.3s;
+}
+
+.skill-card-3d:hover .skill-icon-img {
+    filter: invert(1) brightness(1) drop-shadow(0 0 5px var(--neon-cyan));
+    transform: scale(1.1);
+}
+
+.skill-name {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-align: center;
+    transition: color 0.3s;
+    line-height: 1.2;
+}
+
+.skill-card-3d:hover .skill-name {
+    color: #fff;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .skills-grid-neon {
+        justify-content: center;
+    }
+    .skill-category-title {
+        justify-content: center;
+        text-align: center;
+        padding-left: 0;
+    }
+    .skill-category-title::before {
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: -10px;
+        top: auto;
+        width: 40px;
+        height: 4px;
+    }
+}

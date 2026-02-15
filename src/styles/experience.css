@@ -1,0 +1,195 @@
+/* --- Experience Section (Laser Beam & Spacing Design) --- */
+.experience-section {
+    padding: var(--spacing-lg) 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Container for the list */
+.experience-timeline {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 8rem; /* Increased gap */
+    padding: 4rem 0 4rem 4rem; /* More left padding for the beam */
+    margin-top: 2rem;
+}
+
+/* --- The Laser Beam Line --- */
+.experience-absolute-line {
+    position: absolute;
+    /* Start at padding-top (4rem) + align approx with first dot center */
+    top: 4rem; 
+    bottom: 2rem; /* Stop before very bottom padding */
+    left: 1.5rem; /* Align with dots center (4rem padding - 2.5rem dot offset = 1.5rem) */
+    width: 3px; 
+    background: rgba(255, 255, 255, 0.05); /* The faint track */
+    z-index: 0;
+    border-radius: 99px;
+    overflow: hidden; /* Ensure fill doesn't spill if rounded */
+}
+
+.experience-fill-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Laser Beam Effect */
+    background: linear-gradient(180deg, var(--neon-cyan) 0%, #00aaff 100%);
+    box-shadow: 
+        0 0 15px var(--neon-cyan),
+        0 0 30px var(--neon-cyan),
+        0 0 50px var(--neon-cyan);
+    transform-origin: top;
+    border-radius: 99px;
+    /* Controlled by JS scaleY */
+}
+
+/* --- Item Wrapper (Rows) --- */
+.experience-item-wrapper {
+    display: flex;
+    align-items: flex-start;
+    position: relative;
+    width: 100%;
+    z-index: 1;
+    gap: 3rem; /* Space between dot/line and card */
+}
+
+/* --- The Dot Removed --- */
+.exp-timeline-col {
+   display: none; 
+}
+
+/* Pulsing Dot Removed styles mostly, just keeping class to prevent breakage if referenced */
+.exp-checkpoint-dot {
+    display: none;
+}
+
+
+/* --- Card Content (Premium Glass) --- */
+.experience-card-glass {
+    flex-grow: 1;
+    width: 100%;
+    background: rgba(10, 10, 10, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 24px; /* More rounded */
+    padding: 3rem; /* Spacious padding inside card */
+    position: relative;
+    backdrop-filter: blur(20px);
+    transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+}
+
+.experience-card-glass:hover {
+    transform: translateX(15px);
+    border-color: var(--neon-cyan);
+    background: rgba(20, 25, 30, 0.7);
+    box-shadow: 0 20px 60px -10px rgba(0, 242, 234, 0.15); /* Cyan glow hint */
+}
+
+/* Headers */
+.exp-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+    border-bottom: 1px solid rgba(255,255,255,0.05); /* Separator */
+    padding-bottom: 1.5rem;
+}
+
+.exp-role {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #fff;
+    margin: 0;
+    letter-spacing: -0.02em;
+}
+
+.exp-period-badge {
+    padding: 0.4rem 1rem;
+    border-radius: 99px;
+    font-size: 0.8rem;
+    font-family: 'Space Grotesk', monospace; /* Tech font */
+    font-weight: 600;
+    background: rgba(0, 242, 234, 0.1); /* Cyan tint */
+    color: var(--neon-cyan);
+    border: 1px solid rgba(0, 242, 234, 0.2);
+    box-shadow: 0 0 10px rgba(0, 242, 234, 0.05);
+}
+
+.exp-company {
+    font-size: 1rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.2em; /* Wide spacing for premium feel */
+    margin-bottom: 1.5rem;
+    display: block;
+    font-weight: 500;
+}
+
+.exp-desc {
+    color: #ccc;
+    line-height: 1.8; /* Improve readability */
+    font-size: 1.05rem;
+    margin: 0;
+    max-width: 800px; /* Readability limit */
+}
+
+.exp-projects-reveal {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px dashed rgba(255,255,255,0.1);
+}
+
+.project-list-mini {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.project-list-mini li {
+    font-size: 0.8rem;
+    padding: 0.4rem 1rem;
+    border-radius: 50px;
+    background: rgba(255,255,255,0.03);
+    color: var(--text-muted);
+    border: 1px solid transparent;
+    transition: all 0.3s;
+}
+
+.project-list-mini li:hover {
+    background: rgba(0, 242, 234, 0.1);
+    color: var(--neon-cyan);
+    border-color: rgba(0, 242, 234, 0.3);
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .experience-timeline {
+        padding-left: 2rem;
+        gap: 4rem;
+    }
+    .experience-absolute-line {
+        left: 0.75rem;
+    }
+    .exp-timeline-col {
+        left: -1.75rem;
+        top: 0;
+    }
+    .exp-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    .experience-card-glass {
+        padding: 1.5rem;
+    }
+}

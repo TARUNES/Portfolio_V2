@@ -1,43 +1,71 @@
-/* --- Floating Resume Button (Re-added) --- */
+/* --- Floating Dossier Action Pill --- */
 .floating-resume-container {
     position: fixed;
     bottom: 2rem;
     right: 2rem;
     z-index: 1000;
+    display: inline-flex;
+    align-items: center;
+    background: rgba(15, 17, 23, 0.78);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    padding: 0.35rem 0.5rem 0.35rem 0.75rem;
+    border-radius: 9999px;
+    box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.6), 0 0 15px rgba(0, 242, 234, 0.08);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.resume-btn {
+.floating-resume-container:hover {
+    border-color: rgba(0, 242, 234, 0.4);
+    box-shadow: 0 14px 35px -5px rgba(0, 0, 0, 0.7), 0 0 25px rgba(0, 242, 234, 0.22);
+    transform: translateY(-2px);
+}
+
+.dossier-main-link {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
-    background: rgba(255, 255, 255, 0.05); /* Lighter touch */
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 0.75rem 1.5rem;
-    border-radius: 50px;
-    color: var(--text);
+    gap: 0.45rem;
+    color: #ffffff;
     text-decoration: none;
-    font-weight: 500;
-    font-size: 0.9rem;
-    cursor: none; /* Let Custom Cursor handle */
-    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-}
-
-.resume-btn:hover {
-    background: rgba(255, 255, 255, 0.15);
-    transform: translateY(-5px) scale(1.05);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-    border-color: var(--accent);
-}
-
-.resume-btn .icon {
-    font-size: 1.2rem;
-}
-
-.resume-btn .text {
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    padding: 0.3rem 0.4rem;
+    cursor: none;
+    transition: color 0.2s ease;
+}
+
+.dossier-main-link:hover {
+    color: #00f2ea;
+}
+
+.dossier-divider {
+    width: 1px;
+    height: 16px;
+    background: rgba(255, 255, 255, 0.15);
+    margin: 0 0.25rem;
+}
+
+.dossier-download-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.06);
+    color: rgba(255, 255, 255, 0.75);
+    text-decoration: none;
+    transition: all 0.2s ease;
+    cursor: none;
+}
+
+.dossier-download-btn:hover {
+    background: rgba(0, 242, 234, 0.2);
+    color: #00f2ea;
+    transform: scale(1.1);
 }
 
 @media (max-width: 768px) {

@@ -50,10 +50,6 @@ const Contact = () => {
                 <div className="footer-line"></div>
                 <div className="footer-content" style={{ flexDirection: 'column', gap: '0.5rem' }}>
                      <span>© {new Date().getFullYear()} {contact.email.split('@')[0]}</span>
-                     
-                     <span className="footer-signature">
-                        Designed & Built by <span className="crazy-text">Tarunes K & AI</span> 🤖
-                     </span>
                 </div>
             </footer>
         </section>

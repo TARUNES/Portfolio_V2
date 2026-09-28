@@ -1,0 +1,6 @@
+{
+  "name": "Tarun Portfolio",
+  "description": "Personal portfolio website of Tarunes K showcasing projects, skills, certifications, and experience.",
+  "permissions": [],
+  "capabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

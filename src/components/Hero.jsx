@@ -72,10 +72,11 @@ const Hero = () => {
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ duration: 0.5, delay: 1.2 }}
                     >
-                        <MagneticButton onClick={() => document.getElementById('projects').scrollIntoView({ behavior: 'smooth'})}>
-                            <button className="btn-primary">
-                                {hero.cta}
-                            </button>
+                        <MagneticButton 
+                            className="btn-primary"
+                            onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth'})}
+                        >
+                            {hero.cta}
                         </MagneticButton>
                     </motion.div>
                 </div>

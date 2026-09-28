@@ -4,124 +4,154 @@ const PDFDocument = require('pdfkit');
 function generateResume(outputPath) {
   const doc = new PDFDocument({
     size: 'A4',
-    margins: { top: 32, bottom: 32, left: 38, right: 38 }
+    margins: { top: 28, bottom: 28, left: 36, right: 36 }
   });
 
   const writeStream = fs.createWriteStream(outputPath);
   doc.pipe(writeStream);
 
-  const primaryColor = '#111827';
-  const mutedColor = '#374151';
-  const lightMuted = '#4B5563';
-  const lineColor = '#D1D5DB';
+  const primaryColor = '#0f172a';
+  const bodyColor = '#1e293b';
+  const mutedColor = '#475569';
+  const linkColor = '#0369a1';
+  const lineColor = '#94a3b8';
 
-  // Header
-  doc.font('Helvetica-Bold').fontSize(18).fillColor(primaryColor).text('TARUNES K', { align: 'center' });
-  doc.moveDown(0.2);
-  doc.font('Helvetica-Bold').fontSize(10.5).fillColor(mutedColor).text('AI Agent Software Developer | Backend & Agentic AI Systems', { align: 'center' });
-  doc.moveDown(0.2);
-  doc.font('Helvetica').fontSize(9).fillColor(lightMuted).text('Chennai, India  |  tarunes12@gmail.com  |  +91 9342595981  |  github.com/TARUNES', { align: 'center' });
-  doc.moveDown(0.5);
+  const pageWidth = 595.28;
+  const leftMargin = 36;
+  const contentWidth = pageWidth - (leftMargin * 2);
 
-  function addSectionHeader(title) {
-    doc.moveDown(0.4);
+  // Header - Centered Name
+  doc.font('Helvetica-Bold').fontSize(19).fillColor(primaryColor).text('Tarunes K', { align: 'center' });
+  doc.moveDown(0.2);
+  
+  // Contact row
+  doc.font('Helvetica').fontSize(9).fillColor(bodyColor);
+  doc.text(
+    '+91 9342595981  |  tarunes12@gmail.com  |  LinkedIn  |  GitHub  |  Portfolio',
+    { align: 'center' }
+  );
+  doc.moveDown(0.4);
+
+  function addSection(title) {
+    doc.moveDown(0.35);
     doc.font('Helvetica-Bold').fontSize(9.5).fillColor(primaryColor).text(title.toUpperCase(), { characterSpacing: 0.5 });
     const y = doc.y + 1;
-    doc.strokeColor(lineColor).lineWidth(0.8).moveTo(38, y).lineTo(595.28 - 38, y).stroke();
-    doc.y = y + 4;
+    doc.strokeColor(lineColor).lineWidth(0.75).moveTo(leftMargin, y).lineTo(pageWidth - leftMargin, y).stroke();
+    doc.y = y + 3.5;
   }
 
-  // PROFESSIONAL SUMMARY
-  addSectionHeader('Professional Summary');
-  doc.font('Helvetica').fontSize(8.5).fillColor(mutedColor).text(
-    'AI Agent Software Developer with 2+ years shipping production AI systems end-to-end, from stakeholder scoping to Azure Kubernetes deployment. Specializes in agentic architectures (LangGraph, AutoGen, MCP, multi-agent orchestration), RAG, and scalable backend engineering (FastAPI, Java, microservices). Cut manual engineering effort by up to 40% and API costs by 30% through autonomous incident-resolution and LLM-gateway platforms. Microsoft Certified Azure AI Engineer Associate, currently driving AI adoption and productivity tooling across engineering teams in a telecom enterprise.',
+  // SUMMARY
+  addSection('Summary');
+  doc.font('Helvetica').fontSize(8.5).fillColor(bodyColor).text(
+    'Software Engineer with 2+ years of experience building production-grade backend systems, observability platforms, and event-driven microservices on Azure and Kubernetes. Currently an AI Agent Software Developer at Ericsson, shipping agentic AI and Java backend platforms; previously owned 2 production AI systems end-to-end at Anunta. Microsoft Certified Azure AI Engineer Associate.',
     { align: 'justify', lineGap: 1.5 }
   );
 
-  // CORE SKILLS
-  addSectionHeader('Core Skills');
-  const skills = [
-    { label: 'AI / Agentic Systems', val: 'LangChain, LangGraph, AutoGen, MCP, Multi-Agent Orchestration, RAG, Voice AI, vLLM, LoRA/PEFT, LLM Evaluation, Prompt Engineering, Vector Embeddings' },
-    { label: 'Backend & Languages', val: 'Python, Java, SQL, JavaScript, FastAPI, REST API Design, OAuth 2.0, RBAC, Microservices, WebSockets, RabbitMQ, SQLAlchemy' },
-    { label: 'Cloud, DevOps & Data', val: 'Microsoft Azure, Azure OpenAI, Azure Kubernetes Service (AKS), Docker, Kubernetes, CI/CD, PostgreSQL, Redis, Qdrant, Neo4j (Knowledge Graphs)' },
-    { label: 'Governance & Tooling', val: 'OPA, Presidio (PII Masking), Semantic Caching (RedisVL), Mermaid/Diagram Automation, LLD Generation, Release Automation' }
-  ];
-
-  skills.forEach(s => {
-    doc.font('Helvetica-Bold').fontSize(8.5).fillColor(primaryColor).text('•  ' + s.label + ': ', { continued: true });
-    doc.font('Helvetica').fontSize(8.5).fillColor(mutedColor).text(s.val, { lineGap: 1 });
-  });
-
-  // PROFESSIONAL EXPERIENCE
-  addSectionHeader('Professional Experience');
+  // WORK EXPERIENCE
+  addSection('Work Experience');
 
   // Ericsson
-  doc.font('Helvetica-Bold').fontSize(9).fillColor(primaryColor).text('AI Agent Software Developer  |  Ericsson', { continued: true });
-  doc.font('Helvetica-Bold').fontSize(8.5).fillColor(mutedColor).text('May 2026 – Present | Chennai, India', { align: 'right' });
+  doc.font('Helvetica-Bold').fontSize(9).fillColor(primaryColor).text('AI Agent Software Developer', leftMargin, doc.y, { continued: true });
+  doc.font('Helvetica-Bold').fontSize(8.5).fillColor(primaryColor).text('May 2026 - Present', { align: 'right' });
+  doc.font('Helvetica-Oblique').fontSize(8.5).fillColor(mutedColor).text('Ericsson | Chennai, India');
+  doc.moveDown(0.15);
+
   const ericssonBullets = [
-    'Designed and shipped a release-note automation system from scratch, now adopted team-wide across the organization, eliminating manual release documentation effort.',
-    'Built a Low-Level Design (LLD) generator that auto-derives design documentation from Java codebases, standardizing design output and cutting design-review turnaround time.',
-    'Deliver AI Agent and Java backend engineering for internal platforms, partnering with cross-functional teams to embed agentic AI into existing telecom software workflows.',
-    'Conducted internal GenAI and Agentic AI enablement sessions for 45+ senior engineers, translating LLM concepts into practical workflows for non-AI teams.',
-    'Self-initiated a Voice AI assistant integrated into SDLC workflows as a proof-of-concept demonstrating end-to-end agentic design patterns, and own the mandate to drive AI adoption and productivity across the team, contributing directly to AI-in-telecom initiatives.'
+    'Designed and shipped a release-note automation system from scratch, now adopted team-wide, eliminating manual release documentation effort; built a LLD generator that auto-derives design documentation from Java codebases.',
+    'Deliver AI Agent and Java backend engineering for internal telecom platforms, partnering with cross-functional teams to embed agentic AI into existing software workflows.',
+    'Conducted GenAI and Agentic AI enablement sessions for 45+ senior engineers; self-initiated a Voice AI assistant integrated into SDLC workflows as an end-to-end agentic design proof-of-concept.'
   ];
   ericssonBullets.forEach(b => {
-    doc.font('Helvetica').fontSize(8.2).fillColor(mutedColor).text('•  ' + b, { indent: 10, lineGap: 1 });
+    doc.font('Helvetica').fontSize(8.2).fillColor(bodyColor).text('•  ' + b, { indent: 8, lineGap: 1 });
   });
 
-  doc.moveDown(0.3);
+  doc.moveDown(0.25);
 
   // Anunta
-  doc.font('Helvetica-Bold').fontSize(9).fillColor(primaryColor).text('Software Engineer  |  Anunta Technology', { continued: true });
-  doc.font('Helvetica-Bold').fontSize(8.5).fillColor(mutedColor).text('Jul 2024 – Apr 2026 | Chennai, India', { align: 'right' });
+  doc.font('Helvetica-Bold').fontSize(9).fillColor(primaryColor).text('Software Engineer', leftMargin, doc.y, { continued: true });
+  doc.font('Helvetica-Bold').fontSize(8.5).fillColor(primaryColor).text('Jul 2024 - Apr 2026', { align: 'right' });
+  doc.font('Helvetica-Oblique').fontSize(8.5).fillColor(mutedColor).text('Anunta Technology | Chennai, India');
+  doc.moveDown(0.15);
+
   const anuntaBullets = [
-    'Owned the full lifecycle of 2 production AI systems as sole AI engineer - from stakeholder problem scoping through architecture design to deployment on Azure Kubernetes.',
-    'Built Incident Resolver, a production AIOps platform (FastAPI, AutoGen, RAG, Qdrant, Azure OpenAI) that autonomously triages incidents and executes resolution workflows, reducing manual engineering intervention by 40%.',
-    'Engineered DesktopReady, multi-tenant backend microservices for a DaaS platform automating VM lifecycle, user/group management, and monitoring; built DeskMate, a local-inference agentic desktop assistant on vLLM that resolves system anomalies before they escalate.'
+    { bold: 'DesktopReady (DaaS): ', text: 'Engineered multi-tenant backend microservices for an Azure-based Desktop-as-a-Service platform - automating VM lifecycle, user provisioning, and Active Directory sync using Go, FastAPI, and Pydantic across 500+ virtual desktop sessions. Built DeskMate, a local-inference agentic desktop assistant on vLLM.' },
+    { bold: 'Event-Driven Architecture & Log Pipeline: ', text: 'Architected asynchronous messaging with Kafka and RabbitMQ, reducing inter-service latency by 25%; designed a high-throughput log ingestion pipeline' },
+    { bold: 'Incident Resolver (AIOps Platform): ', text: 'A production AIOps platform (FastAPI, AutoGen, RAG, Qdrant, Azure OpenAI) that autonomously triages incidents and executes resolution workflows, reducing manual engineering intervention by 40%.' }
   ];
   anuntaBullets.forEach(b => {
-    doc.font('Helvetica').fontSize(8.2).fillColor(mutedColor).text('•  ' + b, { indent: 10, lineGap: 1 });
+    doc.font('Helvetica-Bold').fontSize(8.2).fillColor(bodyColor).text('•  ' + b.bold, { indent: 8, continued: true });
+    doc.font('Helvetica').fontSize(8.2).fillColor(bodyColor).text(b.text, { lineGap: 1 });
   });
 
-  doc.moveDown(0.3);
+  doc.moveDown(0.25);
 
   // Xendworks
-  doc.font('Helvetica-Bold').fontSize(9).fillColor(primaryColor).text('Software Engineer Intern  |  Xendworks', { continued: true });
-  doc.font('Helvetica-Bold').fontSize(8.5).fillColor(mutedColor).text('Jan 2024 – Jul 2024 | Chennai, India', { align: 'right' });
-  const xendworksBullets = [
-    'Built secure REST APIs (OAuth 2.0, RBAC) and a Flutter application from scratch with direct stakeholder involvement across the full requirements-to-delivery cycle.',
-    'Shipped a production app that scaled to 1,000+ active users, driving 20% engagement growth.'
+  doc.font('Helvetica-Bold').fontSize(9).fillColor(primaryColor).text('Software Engineer Intern', leftMargin, doc.y, { continued: true });
+  doc.font('Helvetica-Bold').fontSize(8.5).fillColor(primaryColor).text('Jan 2024 - Jul 2024', { align: 'right' });
+  doc.font('Helvetica-Oblique').fontSize(8.5).fillColor(mutedColor).text('Xendworks | Chennai, India');
+  doc.moveDown(0.15);
+
+  doc.font('Helvetica').fontSize(8.2).fillColor(bodyColor).text(
+    '•  Built secure RESTful APIs with OAuth 2.0 and Role-Based Access Control (RBAC) for sensitive enterprise data modules; shipped a Flutter app to 1,000+ active users with 20% engagement growth.',
+    { indent: 8, lineGap: 1 }
+  );
+
+  // TECHNICAL SKILLS
+  addSection('Technical Skills');
+  const skillsData = [
+    { title: 'Languages: ', detail: 'Python, Go (Golang), Java, SQL, JavaScript' },
+    { title: 'Backend & Systems: ', detail: 'Microservices, FastAPI, Kafka, RabbitMQ, asyncio, SQLAlchemy, Pydantic, OAuth 2.0, System Design' },
+    { title: 'Cloud/DevOps: ', detail: 'Docker, Kubernetes, Azure, AKS, Git, Linux, CI/CD, Jenkins' },
+    { title: 'AI / ML: ', detail: 'LangChain, LangGraph, AutoGen, MCP, Agentic AI, RAG, Azure OpenAI, Voice AI, vLLM, LoRA/PEFT' },
+    { title: 'Databases & Governance: ', detail: 'PostgreSQL, MongoDB, Redis, Qdrant, ChromaDB, Neo4j, OPA, Presidio' }
   ];
-  xendworksBullets.forEach(b => {
-    doc.font('Helvetica').fontSize(8.2).fillColor(mutedColor).text('•  ' + b, { indent: 10, lineGap: 1 });
+  skillsData.forEach(s => {
+    doc.font('Helvetica-Bold').fontSize(8.2).fillColor(primaryColor).text(s.title, { continued: true });
+    doc.font('Helvetica').fontSize(8.2).fillColor(bodyColor).text(s.detail, { lineGap: 1 });
   });
 
-  // SELECTED PROJECTS
-  addSectionHeader('Selected Projects');
+  // PROJECTS
+  addSection('Projects');
 
-  doc.font('Helvetica-Bold').fontSize(9).fillColor(primaryColor).text('Aegis - LLM Gateway & Governance Platform', { continued: true });
-  doc.font('Helvetica-Oblique').fontSize(8).fillColor(lightMuted).text(' - FastAPI, Kubernetes, RedisVL, Qdrant, Presidio, OPA, LangChain, PostgreSQL, Neo4j');
-  const aegisBullets = [
-    'Built a multi-tenant LLM gateway handling request routing, cost governance, and enterprise safety at scale for AI applications.',
-    'Cut API costs by 30% with a hybrid semantic cache (RedisVL); enforced PII masking (Presidio) and token budgets (OPA); added a Knowledge-Augmented Generation (KAG) layer on Neo4j for structured reasoning.'
-  ];
-  aegisBullets.forEach(b => {
-    doc.font('Helvetica').fontSize(8.2).fillColor(mutedColor).text('•  ' + b, { indent: 10, lineGap: 1 });
-  });
+  // Aegis
+  doc.font('Helvetica-Bold').fontSize(8.8).fillColor(primaryColor).text('Aegis | Centralized Gateway & Governance Platform');
+  doc.font('Helvetica').fontSize(8.1).fillColor(bodyColor).text(
+    '•  Built a high-performance multi-tenant LLM gateway in Go and FastAPI for request routing, rate limiting, and cost governance; integrated Prometheus metrics and Splunk dashboards; cut API costs by 30% with a hybrid semantic + exact-match cache (RedisVL); enforced PII masking (Presidio) and token budgets (OPA); deployed on Kubernetes with Qdrant, PostgreSQL, and a Neo4j knowledge-graph layer.',
+    { indent: 8, lineGap: 1 }
+  );
 
   doc.moveDown(0.2);
-  doc.font('Helvetica-Bold').fontSize(9).fillColor(primaryColor).text('NeverHold - Voice AI Platform', { continued: true });
-  doc.font('Helvetica-Oblique').fontSize(8).fillColor(lightMuted).text(' - AsyncIO, LangGraph, Redis, Real-Time Audio Streaming, STT/TTS');
-  doc.font('Helvetica').fontSize(8.2).fillColor(mutedColor).text('•  Real-time voice AI platform for asynchronous customer interaction with conversation-state, interruption, and context handling across sessions.', { indent: 10, lineGap: 1 });
 
-  // EDUCATION & CERTIFICATIONS (Side-by-side or stacked cleanly)
-  addSectionHeader('Education');
-  doc.font('Helvetica-Bold').fontSize(9).fillColor(primaryColor).text('B.Tech, Information Technology', { continued: true });
-  doc.font('Helvetica-Bold').fontSize(8.5).fillColor(mutedColor).text('2025', { align: 'right' });
-  doc.font('Helvetica').fontSize(8.5).fillColor(lightMuted).text('KCG College of Technology  |  CGPA: 8.05');
+  // FlowState
+  doc.font('Helvetica-Bold').fontSize(8.8).fillColor(primaryColor).text('FlowState | Autonomous Multi-Agent Orchestration');
+  doc.font('Helvetica').fontSize(8.1).fillColor(bodyColor).text(
+    '•  Designed a DAG-based workflow engine with parallel agent execution plus retry and rollback; built custom Human-in-the-Loop (HITL) modules ensuring 100% compliance with healthcare safety standards while automating 80% of manual verification.',
+    { indent: 8, lineGap: 1 }
+  );
+  doc.font('Helvetica-Bold').fontSize(8.1).fillColor(primaryColor).text('    Tech Stack: ', { continued: true });
+  doc.font('Helvetica').fontSize(8.1).fillColor(bodyColor).text('LangGraph, LangChain, FastAPI, Multi-Agent Systems, Python, Vue.js, FastMCP (MCP).', { lineGap: 1 });
 
-  addSectionHeader('Certifications');
-  doc.font('Helvetica').fontSize(8.5).fillColor(mutedColor).text('•  Microsoft Certified: Azure AI Engineer Associate (2025)');
+  doc.moveDown(0.2);
+
+  // NeverHold
+  doc.font('Helvetica-Bold').fontSize(8.8).fillColor(primaryColor).text('NeverHold | Voice AI Platform');
+  doc.font('Helvetica').fontSize(8.1).fillColor(bodyColor).text(
+    '•  Real-time voice AI platform for asynchronous customer interaction, handling conversation state, interruptions, and context across sessions.',
+    { indent: 8, continued: true }
+  );
+  doc.font('Helvetica-Bold').fontSize(8.1).fillColor(primaryColor).text(' Tech Stack: ', { continued: true });
+  doc.font('Helvetica').fontSize(8.1).fillColor(bodyColor).text('AsyncIO, LangGraph, Redis, Real-Time Audio Streaming, STT/TTS.', { lineGap: 1 });
+
+  // CERTIFICATIONS
+  addSection('Certifications');
+  doc.font('Helvetica-Bold').fontSize(8.5).fillColor(primaryColor).text('Microsoft Certified: Azure AI Engineer Associate | Microsoft', leftMargin, doc.y, { continued: true });
+  doc.font('Helvetica-Bold').fontSize(8.5).fillColor(primaryColor).text('2025', { align: 'right' });
+
+  // EDUCATION
+  addSection('Education');
+  doc.font('Helvetica-Bold').fontSize(8.5).fillColor(primaryColor).text('KCG College of Technology | Chennai', leftMargin, doc.y, { continued: true });
+  doc.font('Helvetica-Bold').fontSize(8.5).fillColor(primaryColor).text('2021 - 2025', { align: 'right' });
+  doc.font('Helvetica').fontSize(8.2).fillColor(bodyColor).text('B.Tech in Information Technology | CGPA: 8.05');
 
   doc.end();
 
@@ -132,9 +162,10 @@ function generateResume(outputPath) {
 }
 
 async function run() {
+  await generateResume('public/Tarunes_K_Dossier.pdf');
   await generateResume('public/Tarunes_K_Resume.pdf');
   await generateResume('public/Tarunes_K_CV.pdf');
-  console.log('Successfully generated updated resume and CV PDFs!');
+  console.log('Generated updated PDF for Dossier, Resume, and CV!');
 }
 
 run().catch(console.error);

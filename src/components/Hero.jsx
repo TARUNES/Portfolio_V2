@@ -71,12 +71,20 @@ const Hero = () => {
                         initial={{ opacity: 0, scale: 0.9 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ duration: 0.5, delay: 1.2 }}
+                        style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}
                     >
                         <MagneticButton 
                             className="btn-primary"
                             onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth'})}
                         >
                             {hero.cta}
+                        </MagneticButton>
+
+                        <MagneticButton 
+                            className="btn-secondary"
+                            onClick={() => window.dispatchEvent(new CustomEvent('open-resume-modal'))}
+                        >
+                            View Dossier ↗
                         </MagneticButton>
                     </motion.div>
                 </div>

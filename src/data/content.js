@@ -1,10 +1,10 @@
-// Content data aligned with the latest resume of Tarunes K
+// Content data derived from the updated resume and professional background
 
 export const hero = {
     greeting: "Hello, I'm",
     name: "Tarunes K",
-    title: "Software Engineer",
-    subtitle: "2+ years of experience building production-grade backend systems, observability platforms, and event-driven microservices on Azure and Kubernetes. Shipping agentic AI & Java backend platforms at Ericsson; previously built production AI systems at Anunta.",
+    title: "AI Agent Software Developer",
+    subtitle: "Specializing in Backend & Agentic AI Systems. 2+ years shipping production AI systems, LLM gateways, and multi-agent architectures on Azure & Kubernetes.",
     cta: "View Projects",
 };
 
@@ -12,29 +12,29 @@ export const projects = [
     {
         id: 1,
         title: "Aegis",
-        category: "Centralized Gateway & Governance Platform",
+        category: "LLM Gateway & Governance Platform",
         image: "/aegis-dashboard.png",
-        description: "High-performance multi-tenant LLM gateway in Go and FastAPI for request routing, rate limiting, and cost governance. Integrated Prometheus metrics and Splunk dashboards; cut API costs by 30% with a hybrid semantic + exact-match cache (RedisVL); enforced PII masking (Presidio) and token budgets (OPA); deployed on Kubernetes with Qdrant, PostgreSQL, and a Neo4j knowledge-graph layer.",
-        tags: ["Go", "FastAPI", "Kubernetes", "RedisVL", "Qdrant", "Presidio", "OPA", "Neo4j"],
+        description: "Multi-tenant LLM gateway handling request routing, cost governance, and enterprise safety at scale. Cut API costs by 30% with hybrid semantic caching (RedisVL), enforced PII masking (Presidio) and token budgets (OPA), with a Knowledge-Augmented Generation (KAG) layer on Neo4j.",
+        tags: ["FastAPI", "Kubernetes", "RedisVL", "Qdrant", "Presidio", "OPA", "LangChain", "Neo4j"],
         link: "https://github.com/TARUNES/aegis-llm-gateway"
     },
     {
         id: 2,
-        title: "FlowState",
-        category: "Autonomous Multi-Agent Orchestration",
+        title: "NeverHold",
+        category: "Real-Time Voice AI Platform",
         image: "/flowstate-dashboard.png",
-        description: "DAG-based workflow engine with parallel agent execution plus retry and rollback. Features custom Human-in-the-Loop (HITL) modules ensuring 100% compliance with healthcare safety standards while automating 80% of manual verification.",
-        tags: ["LangGraph", "LangChain", "FastAPI", "Multi-Agent Systems", "Python", "FastMCP"],
-        link: "https://github.com/TARUNES/flow-state-ai-langgraph"
+        description: "Real-time voice AI platform for asynchronous customer interaction with low-latency conversation-state, interruption, and context handling across sessions.",
+        tags: ["AsyncIO", "LangGraph", "Redis", "Real-Time Audio", "WebSockets", "STT/TTS"],
+        link: "https://github.com/TARUNES"
     },
     {
         id: 3,
-        title: "NeverHold",
-        category: "Voice AI Platform",
+        title: "FlowState",
+        category: "Multi-Agent Orchestration",
         image: "/flowstate-2dashboard.png",
-        description: "Real-time voice AI platform for asynchronous customer interaction, handling conversation state, interruptions, and context across sessions.",
-        tags: ["AsyncIO", "LangGraph", "Redis", "Real-Time Audio", "STT/TTS"],
-        link: "https://github.com/TARUNES"
+        description: "Designed DAG-based workflow engine for parallel agent execution. Features Human-in-the-Loop oversight ensuring compliance with enterprise workflows and standards.",
+        tags: ["LangGraph", "LangChain", "FastAPI", "Python", "AutoGen"],
+        link: "https://github.com/TARUNES/flow-state-ai-langgraph"
     }
 ];
 
@@ -42,37 +42,37 @@ export const experience = [
     {
         id: 1,
         role: "AI Agent Software Developer",
-        company: "Ericsson | Chennai, India",
-        period: "May 2026 - Present",
-        description: "Designed and shipped a release-note automation system from scratch, now adopted team-wide, eliminating manual release documentation effort; built a LLD generator that auto-derives design documentation from Java codebases. Deliver AI Agent and Java backend engineering for internal telecom platforms, partnering with cross-functional teams to embed agentic AI into existing software workflows. Conducted GenAI and Agentic AI enablement sessions for 45+ senior engineers; self-initiated a Voice AI assistant integrated into SDLC workflows as an end-to-end agentic design proof-of-concept.",
+        company: "Ericsson",
+        period: "May 2026 – Present",
+        description: "Designed and shipped a release-note automation system from scratch, adopted team-wide across the organization. Built a Low-Level Design (LLD) generator auto-deriving documentation from Java codebases. Deliver AI Agent and Java backend engineering for internal platforms, conducted GenAI enablement sessions for 45+ senior engineers, and built a Voice AI SDLC assistant.",
         keyProjects: ["Release-Note Automation System", "Java LLD Generator", "Voice AI SDLC Assistant"]
     },
     {
         id: 2,
         role: "Software Engineer",
-        company: "Anunta Technology | Chennai, India",
-        period: "Jul 2024 - Apr 2026",
-        description: "DesktopReady (DaaS): Engineered multi-tenant backend microservices for an Azure-based Desktop-as-a-Service platform - automating VM lifecycle, user provisioning, and Active Directory sync using Go, FastAPI, and Pydantic across 500+ virtual desktop sessions. Built DeskMate, a local-inference agentic desktop assistant on vLLM. Event-Driven Architecture & Log Pipeline: Architected asynchronous messaging with Kafka and RabbitMQ, reducing inter-service latency by 25%; designed a high-throughput log ingestion pipeline. Incident Resolver (AIOps Platform): A production AIOps platform (FastAPI, AutoGen, RAG, Qdrant, Azure OpenAI) that autonomously triages incidents and executes resolution workflows, reducing manual engineering intervention by 40%.",
-        keyProjects: ["DesktopReady (DaaS Microservices)", "Kafka & RabbitMQ Messaging Pipeline", "Incident Resolver (AIOps)"]
+        company: "Anunta Technology",
+        period: "Jul 2024 – Apr 2026",
+        description: "Owned the full lifecycle of 2 production AI systems as sole AI engineer from problem scoping through architecture design to Azure Kubernetes deployment. Built Incident Resolver (FastAPI, AutoGen, RAG, Qdrant, Azure OpenAI) cutting manual engineering triage by 40%. Engineered DesktopReady multi-tenant microservices and built DeskMate local-inference assistant on vLLM.",
+        keyProjects: ["Incident Resolver (AIOps)", "DesktopReady (DaaS Microservices)", "DeskMate (vLLM Agent)"]
     },
     {
         id: 3,
         role: "Software Engineer Intern",
-        company: "Xendworks | Chennai, India",
-        period: "Jan 2024 - Jul 2024",
-        description: "Built secure RESTful APIs with OAuth 2.0 and Role-Based Access Control (RBAC) for sensitive enterprise data modules; shipped a Flutter app to 1,000+ active users with 20% engagement growth.",
-        keyProjects: ["RESTful APIs & RBAC", "Flutter Production App"]
+        company: "Xendworks",
+        period: "Jan 2024 – Jul 2024",
+        description: "Built secure REST APIs (OAuth 2.0, RBAC) and a Flutter mobile application from scratch with direct stakeholder involvement across the full requirements-to-delivery cycle. Shipped a production app scaled to 1,000+ active users, driving 20% engagement growth.",
+        keyProjects: ["Secure REST APIs & Auth", "Flutter Mobile App (1,000+ Users)"]
     }
 ];
 
 export const education = [
     {
         id: 1,
-        degree: "B.Tech in Information Technology",
-        school: "KCG College of Technology | Chennai",
-        period: "2021 - 2025",
+        degree: "B.Tech, Information Technology",
+        school: "KCG College of Technology, Chennai",
+        period: "2021 – 2025",
         description: "CGPA: 8.05 / 10",
-        keyProjects: ["Incident Resolver", "Aegis Gateway"]
+        keyProjects: ["Incident Resolver", "Aegis LLM Gateway"]
     }
 ];
 
@@ -83,21 +83,32 @@ export const certifications = [
         issuer: "Microsoft",
         year: "2025",
         link: "https://learn.microsoft.com/en-us/credentials/certifications/azure-ai-engineer/",
-        description: "Certified in building, training, and deploying cognitive models and agentic AI systems on Microsoft Azure."
+        description: "Certified in designing and implementing AI solutions using Azure AI, Azure OpenAI, cognitive search, and semantic knowledge pipelines."
+    },
+    {
+        id: 2,
+        title: "HACKATOGE Winner",
+        issuer: "Hackathon",
+        year: "2024",
+        link: "#",
+        description: "Created an innovative fitness app showcasing technical skill and rapid product delivery."
+    },
+    {
+        id: 3,
+        title: "Skillathon Winner",
+        issuer: "Skillathon",
+        year: "2023",
+        link: "#",
+        description: "Built a clinical assistance app driving innovation in healthcare and clinical workflows."
     }
 ];
 
 export const skills = [
-    // Languages
-    "Python", "Go", "Java", "SQL", "JavaScript",
-    // Backend & Systems
-    "FastAPI", "Microservices", "Kafka", "RabbitMQ", "OAuth 2.0",
-    // Cloud / DevOps
-    "Microsoft Azure", "Kubernetes", "Docker", "CI/CD", "Linux",
-    // AI / ML
-    "LangGraph", "LangChain", "AutoGen", "MCP", "RAG", "Voice AI", "vLLM",
-    // Databases & Governance
-    "PostgreSQL", "Redis", "Qdrant", "Neo4j", "OPA", "Presidio", "RedisVL"
+    "LangGraph", "LangChain", "AutoGen", "MCP", "Multi-Agent Orchestration",
+    "RAG", "Voice AI", "vLLM", "Prompt Engineering", "Python",
+    "Java", "FastAPI", "Microsoft Azure", "Kubernetes", "Docker",
+    "PostgreSQL", "Redis", "Qdrant", "Neo4j", "OPA",
+    "Presidio", "RedisVL", "REST API Design", "OAuth 2.0", "RabbitMQ", "Microservices"
 ];
 
 export const contact = {
@@ -116,7 +127,7 @@ export const contact = {
 };
 
 export const archive = [
-    { year: "2026", title: "aegis-llm-gateway", tech: ["Go", "FastAPI", "Neo4j", "RedisVL"], link: "https://github.com/TARUNES/aegis-llm-gateway" },
+    { year: "2026", title: "aegis-llm-gateway", tech: ["Python", "FastAPI", "Neo4j", "RedisVL"], link: "https://github.com/TARUNES/aegis-llm-gateway" },
     { year: "2025", title: "flow-state-ai-langgraph", tech: ["Python", "LangGraph", "FastAPI"], link: "https://github.com/TARUNES/flow-state-ai-langgraph" },
     { year: "2025", title: "plug-play-chatbot-ai", tech: ["Python", "LangChain"], link: "https://github.com/TARUNES/plug-play-chatbot-ai" },
     { year: "2025", title: "interior-panel-layout", tech: ["JavaScript"], link: "https://github.com/TARUNES/interior-panel-layout" },
